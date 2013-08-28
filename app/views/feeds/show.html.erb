@@ -1,0 +1,17 @@
+<div style="width:100%; padding:30px 0; background:#BDAF8E; border-bottom:3px solid #000;">
+<h1 style="margin-left:30px;">Feed</h1>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+
+<% rss = RSS::Parser.parse(open(@feed.feed_url).read, false) %>
+ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed Title:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= rss.channel.title %></strong>
+
+<p>
+  <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed url:</b>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @feed.feed_url %>
+</p>
+<br>
+<%= link_to 'Edit', edit_feed_path(@feed), :class=>"new-feed" %> 
+<%= link_to 'Back', feeds_path, :class=>"new-feed" %>

@@ -1,0 +1,106 @@
+<style>
+*{margin:0; padding:0;}
+body{background:#E6E1D5;}
+a.dashboard:link, a.dashboard:visited
+{
+padding:10px;
+text-decoration:none;
+background:#9CBA88;
+}
+
+a.show:link, a.show:visited
+{
+padding:3px 7px;
+margin:0 7px;
+text-decoration:none;
+background:#849E4F;
+float:left;
+color:#000;
+font-size:10px;
+}
+a.show:hover
+{
+background:#98B85A;
+color:#fff;
+}
+
+
+a.edit:link, a.edit:visited
+{
+padding:3px 7px;
+margin:0 7px;
+text-decoration:none;
+background:#D6C64D;
+float:left;
+color:#000;
+font-size:10px;
+}
+a.edit:hover
+{
+background:#EBE196;
+color:#fff;
+}
+
+
+a.delete:link, a.delete:visited
+{
+padding:3px 7px;
+margin:0 7px;
+text-decoration:none;
+background:#CC4A47;
+float:left;
+color:#000;
+font-size:10px;
+}
+a.delete:hover
+{
+background:#E6E1D5;
+color:#000;
+}
+
+
+a.new-feed:link, a.new-feed:visited
+{
+padding:5px 10px;
+margin:0 7px;
+text-decoration:none;
+background:#BDAF8E;
+float:left;
+color:#000;
+font-size:14px;
+}
+a.new-feed:hover
+{
+background:#CCC2A9;
+color:#000;
+}
+</style>
+<div style="width:100%; padding:30px 0; background:#BDAF8E; border-bottom:3px solid #000;">
+<h1 style="margin-left:30px;">Rss feeds</h1>
+</div>
+<div style=" width:100%; position:relative;">
+<table style="width:100%;">
+  <tr style="background:#CCC2A9;">
+    <th style="padding:15px 0; text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed Title</th>
+    <th style="padding:15px 0; text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed url</th>
+    <th style="padding:15px 0; text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action</th>
+  </tr>
+<% grades = Hash.new %>
+<% grades2 = Hash.new %>
+
+<% @feeds.each do |feed| %>
+  <tr style="background:#D9D5BA;">
+    
+<% rss = RSS::Parser.parse(open(feed.feed_url).read, false) %>
+<td style="padding:7px 0; text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= rss.channel.title %></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= feed.feed_url %></td>
+    <td><%= link_to 'Show', feed, :class=> "show" %><%= link_to 'Edit', edit_feed_path(feed), :class=> "edit" %><%= link_to 'Destroy', feed, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class=> "delete" %></td>
+  </tr>
+
+
+<% end %>
+</table>
+
+<%= link_to 'New Feed', new_feed_path, :class=>"new-feed" %>
+</div>
+

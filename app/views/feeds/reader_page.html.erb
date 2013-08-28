@@ -1,0 +1,29 @@
+
+<div style="width:100%; padding:30px 0; background:#BDAF8E; border-bottom:3px solid #000;">
+<h1 style="margin-left:30px;">Rss feeds</h1>
+</div>
+
+<div style="background:#E6E1D5; width:100%; position:relative;">
+<%#= link_to("Dashboard", {:action => "index"}, :class => "dashboard")%>
+
+<% grades = Hash.new %>
+<% grades2 = Hash.new %>
+
+<% @feeds.each do |feed| %>
+ <% rss = RSS::Parser.parse(open(feed.feed_url).read, false) %>
+<% rss.items.each do |i| %>
+<% grades[i.date] = i.title %>
+<% grades2[i.title] = i.link %>
+
+<% end %>
+<% end %>
+
+
+<% grades.sort.reverse.each do|name,grade| %>
+  <% name.strftime("%m/%d/%Y at %I:%M%p") %>
+<%= link_to(("&nbsp;&nbsp;&nbsp;&nbsp;"+grade).html_safe,grades2[grade], :target => "_blank", :class => "rsslink").html_safe %>
+
+<br/>
+<% end %>
+</div>
+

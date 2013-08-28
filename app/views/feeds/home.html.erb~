@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Feed Title</th>
+    <th>Feed url</th>
+    
+  </tr>
+<% grades = Hash.new %>
+<% grades2 = Hash.new %>
+
+<% @feeds.each do |feed| %>
+  <tr>
+    <td><%= feed.title %></td>
+
+    <td><%= feed.feed_url %></td>
+     </tr>
+
+</table>
+<% end %>
