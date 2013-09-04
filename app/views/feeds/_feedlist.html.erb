@@ -1,0 +1,81 @@
+<script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+
+      // Slideshow 1
+      $("#slider1").responsiveSlides({
+        maxwidth: 800,
+        speed: 800
+      });
+
+      // Slideshow 2
+      $("#slider2").responsiveSlides({
+        auto: false,
+        pager: true,
+        speed: 300,
+        maxwidth: 540
+      });
+
+      // Slideshow 3
+      $("#slider3").responsiveSlides({
+        manualControls: '#slider3-pager',
+        maxwidth: 540
+      });
+
+      // Slideshow 4
+      $("#slider4").responsiveSlides({
+        auto: true,
+        pager: false,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks",
+        
+      });
+
+    });
+  </script>
+   <div id="feeds_list">
+<h4 style="color:#006699;"><% if @title %> <%= @title %> <small>rss feed list</small><% else %> <%= "Sorted rss feeds item of all rss feeds" %><% end %></h4>	
+<div id="feedtitle">
+		<div class="large-12 columns">
+			<div class="large-12 large-centered columns">
+				<div class="callbacks_container">
+					<ul class="rslides" id="slider4">
+<% @grades_keys.each do |k| %>
+<li>
+<p class="caption">
+<%= link_to(("&nbsp;&nbsp;&nbsp;&nbsp;"+@grades[k]).html_safe,@grades2[@grades[k]], :target => "_blank", :class => "rsslink").html_safe %>
+<br/>				<% unless @grades3[k].nil? || @grades3[k] == 0 %>
+                                  <%= truncate(strip_tags(@grades3[k]), :length => 200).html_safe %>
+</p>
+			<% doc = Nokogiri::HTML(@grades3[k]) %>
+				<% @imgpresent = 0 %>
+					<% @imgt= @grades2[@grades[k]] %>
+						<% doc.xpath('//img/@src').each do |node| %>
+							<%= link_to(image_tag(node.text,:width => "50%",:height => "50%"),@imgt, :target => "_blank") %>
+							<% @imgpresent = 1 %>
+							<% break %>
+				<br/>
+                                                <% end %>
+				<% end %>
+<% if @imgpresent == 0 %>
+<%= link_to(image_tag("/assets/default.jpg"),@imgt, :target => "_blank") %>
+<% end %>
+</li>
+<% end %>
+					
+					</ul>
+				</div>
+			</div>
+				
+				<% @grades_keys.each do |k| %>
+				<%= link_to(("&nbsp;&nbsp;&nbsp;&nbsp;"+@grades[k]).html_safe,@grades2[@grades[k]], :target => "_blank", :class => "rsslink").html_safe %><br/><br/>
+				<% end %><div style="clear:both;"></div>
+<%= will_paginate  @grades_keys %>
+		</div>
+	</div>
+<script>
+$(".pagination a").on("click",function(){$.get(this.href,null,null,"script");$(".pagination").html("Loading.."); return false;});
+</script>
+
+    </div>

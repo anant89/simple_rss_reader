@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
-BasicRssReader::Application.config.session_store :cookie_store, :key => '_basic_rss_reader_session'
+Rssfeed::Application.config.session_store :cookie_store, key: '_rssfeed_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-# BasicRssReader::Application.config.session_store :active_record_store
+# Rssfeed::Application.config.session_store :active_record_store

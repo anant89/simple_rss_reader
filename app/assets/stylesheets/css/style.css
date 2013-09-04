@@ -1,0 +1,39 @@
+.pagination { padding: 3px; margin: 3px;margin-top:10px; }
+.pagination a { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #2eaadd; text-decoration: none; color: #2eaadd; }
+.pagination a:hover,
+.pagination a:active { border: 1px solid #006699; color:white;background: none repeat scroll 0% 0% #006699; }
+.pagination span.current { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #000099; font-weight: bold; color:white;background: none repeat scroll 0% 0% rgb(43, 166, 203);}
+.pagination span.disabled { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #eee; color: #ddd; }
+.current {padding: 2px 5px 2px 5px; margin: 2px; border: 1px;color:white;background: none repeat scroll 0% 0% rgb(43, 166, 203);}
+a.rsslink:link, a.rsslink:visited
+{
+width:100%;
+padding:10px 0;
+text-decoration:none;
+background:white;
+position:relative;
+float:left;
+color:rgb(43, 166, 203);
+}
+a.rsslink:hover
+{
+background:rgb(43, 166, 203);
+color:#fff;
+}
+
+a.rsslinklist:link, a.rsslinklist:visited
+{
+width:100%;
+padding:10px 0;
+text-decoration:none;
+background:white;
+position:relative;
+float:left;
+border-bottom:1px solid #D4D1C9;
+color:rgb(43, 166, 203);
+}
+a.rsslinklist:hover
+{
+background:#006699;
+color:#fff;
+}
