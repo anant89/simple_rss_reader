@@ -12,3 +12,4 @@ Details:
 
 --------------------------------------------------------------------------------------------------------------------------------------
 User can click on one of the rss feed listed on left side panel and the page content will be changed with the help of ajax similar thing goes to pagination which get content within the particular rss feed
+you can get it's demo on these url http://whispering-headland-2605.herokuapp.com/
