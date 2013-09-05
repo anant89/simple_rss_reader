@@ -44,13 +44,13 @@
 <% @grades_keys.each do |k| %>
 <li>
 <p class="caption">
-<%= link_to(("&nbsp;&nbsp;&nbsp;&nbsp;"+@grades[k]).html_safe,@grades2[@grades[k]], :target => "_blank", :class => "rsslink").html_safe %>
-<br/>				<% unless @grades3[k].nil? || @grades3[k] == 0 %>
-                                  <%= truncate(strip_tags(@grades3[k]), :length => 200).html_safe %>
+<%= link_to((@gradesm[k][0]).html_safe,@gradesm[k][1], :target => "_blank", :class => "rsslink").html_safe %>
+<br/><% unless @gradesm[k][2].nil? || @gradesm[k][2] == 0 %>
+                                 <%= truncate(strip_tags(@gradesm[k][2]), :length => 200).html_safe %>
 </p>
-			<% doc = Nokogiri::HTML(@grades3[k]) %>
+			<% doc = Nokogiri::HTML(@gradesm[k][2]) %>
 				<% @imgpresent = 0 %>
-					<% @imgt= @grades2[@grades[k]] %>
+					<% @imgt= @gradesm[k][1] %>
 						<% doc.xpath('//img/@src').each do |node| %>
 							<%= link_to(image_tag(node.text,:width => "50%",:height => "50%"),@imgt, :target => "_blank") %>
 							<% @imgpresent = 1 %>
@@ -69,7 +69,7 @@
 			</div>
 				
 				<% @grades_keys.each do |k| %>
-				<%= link_to(("&nbsp;&nbsp;&nbsp;&nbsp;"+@grades[k]).html_safe,@grades2[@grades[k]], :target => "_blank", :class => "rsslink").html_safe %><br/><br/>
+				<%= link_to((@gradesm[k][0]).html_safe,@gradesm[k][1], :target => "_blank", :class => "rsslink").html_safe %><br/><br/>
 				<% end %><div style="clear:both;"></div>
 <%= will_paginate  @grades_keys %>
 		</div>
