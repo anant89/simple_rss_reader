@@ -1,45 +1,31 @@
 class FeedsController < ApplicationController
+include FeedsHelper
 require 'rss'
 require 'nokogiri'
 require 'will_paginate/array'
 def reader_page
     @feeds = Feed.all
-       getting_feed
+      @gradesm = Hash.new #hash to all the rss feed items
+	@feeds.each do |feed|
+          getting_feed feed  # helper method to get content of individuals rss feed
+	end
+          sort_key @gradesm  # helper method to sort all the rss feed post
 	respond_to do |format|
-      format.html # index.html.erb
-      format.js
-    end
+           format.html # index.html.erb
+           format.js
+         end
 	
   end
-def getting_feed
 
-@gradesm = Hash.new
-	@feeds.each do |feed| 
-	    rss = RSS::Parser.parse(open(feed.feed_url).read, false)
-	      rss.items.take(10).each do |i|
-           @gradesm[i.date]= [i.title,i.link,i.description]
-           end 
-	end
-	
-	@grades_keys = @gradesm.keys.sort.reverse.paginate(:page => params[:page],:per_page => 5)
-end
-
-# get title of particular feed
+# get rss feeds of particular feed
 def feed
     @feed = Feed.find(params[:id])
-	
-@gradesm = Hash.new
-	
-	    rss = RSS::Parser.parse(open(@feed.feed_url).read, false)
-           @title = rss.channel.title
-	      rss.items.take(10).each do |i|
-       
-@gradesm[i.date]= [i.title,i.link,i.description]
-           end 
-@grades_keys = @gradesm.keys.sort.reverse.paginate(:page => params[:page],:per_page => 5)
-	respond_to do |format|
+     @gradesm = Hash.new
+        getting_feed @feed	   
+        sort_key @gradesm	
+      respond_to do |format|
       format.html # index.html.erb
       format.js
-    end
+        end
 end
 end
