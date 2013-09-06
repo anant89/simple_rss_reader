@@ -21,7 +21,7 @@ def reader_page
 def feed
     @feed = Feed.find(params[:id])
      @gradesm = Hash.new
-        getting_feed @feed	   
+        @title = getting_feed @feed #setting title of channel return from helper method	   
         sort_key @gradesm	
       respond_to do |format|
       format.html # index.html.erb
