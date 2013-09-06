@@ -12,5 +12,6 @@ def getting_feed feeditem
 	      rss.items.take(10).each do |i|
                @gradesm[i.date]= [i.title,i.link,i.description]
 	      end
+  return rss.channel.title
 end
 end
